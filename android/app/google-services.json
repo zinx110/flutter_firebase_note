@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "777621007253",
+    "project_id": "zinx-firebase-master",
+    "storage_bucket": "zinx-firebase-master.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777621007253:android:010444304f2f975f9c649c",
+        "android_client_info": {
+          "package_name": "com.flutterfirebasenote.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhR2ZFhe5RNNXGoSzb1_wxf7g0WmtQRvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
