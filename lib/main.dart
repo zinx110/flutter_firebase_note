@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_note/core/theme_dark_mode.dart';
+import 'package:flutter_firebase_note/core/theme_light_mode.dart';
 import 'package:flutter_firebase_note/firebase_options.dart';
 import 'package:flutter_firebase_note/pages/home_page.dart';
+import 'package:flutter_firebase_note/pages/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,11 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Firestore Note',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
+      theme: lightMode,
+      darkTheme: darkMode,
+      home: const LoginPage(),
     );
   }
 }

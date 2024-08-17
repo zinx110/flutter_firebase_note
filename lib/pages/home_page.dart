@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_firebase_note/services/firestore.dart';
-import 'package:flutter_firebase_note/widgets/add_edit_form_dialogue.dart';
-import 'package:flutter_firebase_note/widgets/add_note_button.dart';
+import 'package:flutter_firebase_note/widgets/home_page_widgets/add_edit_form_dialogue.dart';
+import 'package:flutter_firebase_note/widgets/home_page_widgets/add_note_button.dart';
 
-import 'package:flutter_firebase_note/widgets/note_tile.dart';
+import 'package:flutter_firebase_note/widgets/home_page_widgets/note_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
