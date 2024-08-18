@@ -1,3 +1,3 @@
-# flutter_firebase_note
+# flutter_firebase_social_media
 
-flutter app with firebase, specifically firestore db. simple crud app.
+Social media app with flutter, firebase auth, firestore db. With Bloc State Management.
