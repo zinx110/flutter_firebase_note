@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_firebase_note/bloc/auth_bloc.dart';
 import 'package:flutter_firebase_note/services/firestore.dart';
 import 'package:flutter_firebase_note/widgets/home_page_widgets/add_edit_form_dialogue.dart';
 import 'package:flutter_firebase_note/widgets/home_page_widgets/add_note_button.dart';
@@ -34,7 +36,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Notes"),
+          title: Text(
+              "Notes of ${(context.read<AuthBloc>().state as AuthSuccess).displayName}"),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: GestureDetector(
+                child: const Text("Logout"),
+                onTap: () {
+                  context.read<AuthBloc>().add(AuthLogoutRequested());
+                },
+              ),
+            )
+          ],
         ),
         floatingActionButton: AddNoteButton(
           openNoteBox: openNoteBox,

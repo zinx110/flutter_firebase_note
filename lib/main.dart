@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_firebase_note/bloc/auth_bloc.dart';
+import 'package:flutter_firebase_note/auth/auth_listener.dart';
+import 'package:flutter_firebase_note/auth/login_or_register.dart';
 import 'package:flutter_firebase_note/core/theme_dark_mode.dart';
 import 'package:flutter_firebase_note/core/theme_light_mode.dart';
 import 'package:flutter_firebase_note/firebase_options.dart';
@@ -18,12 +23,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Firestore Note',
-      debugShowCheckedModeBanner: false,
-      theme: lightMode,
-      darkTheme: darkMode,
-      home: const LoginPage(),
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    return BlocProvider(
+      create: (context) => AuthBloc(firebaseAuth),
+      child: MaterialApp(
+          title: 'Flutter Firestore Note',
+          debugShowCheckedModeBanner: false,
+          theme: lightMode,
+          darkTheme: darkMode,
+          home: const AuthListener()),
     );
   }
 }
