@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_note/services/firestore.dart';
+import 'package:flutter_firebase_note/services/note_service.dart';
+
 import 'package:flutter_firebase_note/widgets/home_page_widgets/delete_confirmation_dialogue.dart';
 
 class NoteTile extends StatelessWidget {
-  final FirestoreService firestoreService;
+  final NoteService noteService;
   final DocumentSnapshot document;
   final String docId;
   final Map<String, dynamic> data;
@@ -14,7 +15,7 @@ class NoteTile extends StatelessWidget {
       {super.key,
       required this.document,
       required this.openNoteBox,
-      required this.firestoreService})
+      required this.noteService})
       : docId = document.id,
         data = document.data() as Map<String, dynamic> {
     noteText = data['note'];
@@ -26,7 +27,7 @@ class NoteTile extends StatelessWidget {
         context: context,
         builder: (context) => DeleteConfirmationDialogue(
           id: docId,
-          firestoreService: firestoreService,
+          noteService: noteService,
         ),
       );
     }

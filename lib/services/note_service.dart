@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-class FirestoreService {
+class NoteService {
   // get collection of notes
   final CollectionReference notes;
-  FirestoreService(this.notes);
-  // FirestoreService(this.notes);
+  final String userId;
+  NoteService({required this.notes, required this.userId});
+  // NoteService(this.notes);
 
   // CREATE: add a new note
   Future<void> addNote(String note) {
@@ -13,6 +15,7 @@ class FirestoreService {
       return notes.add({
         'note': note,
         'timestamp': Timestamp.now(),
+        'user': userId,
       });
     } on FirebaseException catch (e) {
       throw Exception("error adding doc : ${e.message}");
@@ -21,7 +24,13 @@ class FirestoreService {
 
   // READ: get notes from database
   Stream<QuerySnapshot> getNotesStream() {
-    final noteStream = notes.orderBy('timestamp', descending: true).snapshots();
+    final noteStream = notes
+        .where('user', isEqualTo: userId)
+        .orderBy(
+          'timestamp',
+          descending: true,
+        )
+        .snapshots();
     return noteStream;
   }
 

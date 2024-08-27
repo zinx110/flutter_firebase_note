@@ -20,6 +20,10 @@ class _AddNoteButtonState extends State<AddNoteButton> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        onPressed: widget.openNoteBox, child: const Icon(Icons.add));
+        onPressed: widget.openNoteBox,
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).colorScheme.inversePrimary,
+        ));
   }
 }

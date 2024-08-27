@@ -1,10 +1,14 @@
+import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_firebase_note/models/user_model.dart";
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  final CollectionReference _userCollection =
+      FirebaseFirestore.instance.collection('users');
   final FirebaseAuth _firebaseAuth;
   AuthBloc(this._firebaseAuth) : super(AuthInitial()) {
     on<AuthRegisterRequested>(onAuthRegister);
@@ -42,6 +46,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         return;
       }
       await _firebaseAuth.currentUser?.updateDisplayName(name);
+      final UserModel newUser = UserModel(
+          displayName: name,
+          email: email,
+          uid: user.uid,
+          friends: [],
+          friendRequests: []);
+      await _userCollection.add(newUser.toMap());
       emit(AuthSuccess(
         displayName: user.displayName ?? "",
         email: user.email ?? "",

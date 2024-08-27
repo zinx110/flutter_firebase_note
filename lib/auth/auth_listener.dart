@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_firebase_note/auth/tab_page.dart';
 import 'package:flutter_firebase_note/bloc/auth_bloc.dart';
 import 'package:flutter_firebase_note/auth/login_or_register.dart';
-import 'package:flutter_firebase_note/pages/home_page.dart';
+import 'package:flutter_firebase_note/pages/notes_page.dart';
 
 class AuthListener extends StatelessWidget {
   const AuthListener({super.key});
@@ -27,7 +28,7 @@ class AuthListener extends StatelessWidget {
             );
           }
           if (state is AuthSuccess) {
-            return const HomePage();
+            return const TabPage();
           }
           return const LoginOrRegister();
         },

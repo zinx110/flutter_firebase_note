@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_note/services/firestore.dart';
+import 'package:flutter_firebase_note/services/note_service.dart';
 
 class DeleteConfirmationDialogue extends StatelessWidget {
   final String id;
-  final FirestoreService firestoreService;
+  final NoteService noteService;
   const DeleteConfirmationDialogue(
-      {super.key, required this.id, required this.firestoreService});
+      {super.key, required this.id, required this.noteService});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class DeleteConfirmationDialogue extends StatelessWidget {
         ElevatedButton.icon(
           onPressed: () {
             try {
-              firestoreService.deleteNote(id);
+              noteService.deleteNote(id);
               Navigator.pop(context);
             } catch (e) {
               final errorText = e.toString();
@@ -39,12 +39,13 @@ class DeleteConfirmationDialogue extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          label: const Text(
+          label: Text(
             "Cancel",
+            style:
+                TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
           ),
-          icon: const Icon(
-            Icons.cancel,
-          ),
+          icon: Icon(Icons.cancel,
+              color: Theme.of(context).colorScheme.inversePrimary),
         )
       ],
     );

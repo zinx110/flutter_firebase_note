@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_note/services/firestore.dart';
+import 'package:flutter_firebase_note/services/note_service.dart';
 
 class AddEditFormDialogue extends StatelessWidget {
   final String? id;
 
   final TextEditingController textController;
-  final FirestoreService firestoreService;
+  final NoteService noteService;
   const AddEditFormDialogue({
     super.key,
     required this.id,
     required this.textController,
-    required this.firestoreService,
+    required this.noteService,
   });
 
   @override
@@ -30,9 +30,9 @@ class AddEditFormDialogue extends StatelessWidget {
                 throw Exception("Cannot be empty");
               }
               if (id == null) {
-                firestoreService.addNote(note);
+                noteService.addNote(note);
               } else {
-                firestoreService.updateNote(id: id as String, note: note);
+                noteService.updateNote(id: id as String, note: note);
               }
 
               textController.clear();
@@ -46,13 +46,21 @@ class AddEditFormDialogue extends StatelessWidget {
               )));
             }
           },
-          child: Text(id == null ? "Add" : "Save"),
+          child: Text(
+            id == null ? "Add" : "Save",
+            style:
+                TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+          ),
         ),
         ElevatedButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text("Cancel"),
+          child: Text(
+            "Cancel",
+            style:
+                TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+          ),
         ),
       ],
     );
