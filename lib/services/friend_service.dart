@@ -13,6 +13,7 @@ class FriendService {
     try {
       final usersSnapshot =
           await users.where('displayName', isEqualTo: name).limit(5).get();
+      print("");
       if (usersSnapshot.size == 0) return [];
       final usersData =
           usersSnapshot.docs.map((userdoc) => userdoc.data() as UserModel);
